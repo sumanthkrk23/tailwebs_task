@@ -31,7 +31,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. MySQL Database Setup
-- Import the database given in the repo called teacher_portal to get all tables and table data to login
+- Import the database given in the repo called teacher_portal.sql to get all tables and table data to login
 - Update your MySQL credentials in `app.py` if needed.
 
 ### 4. Run the App
