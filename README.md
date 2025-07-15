@@ -31,27 +31,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. MySQL Database Setup
-- Create the database and tables:
-```sql
-CREATE DATABASE IF NOT EXISTS teacher_portal;
-USE teacher_portal;
-
-CREATE TABLE IF NOT EXISTS teachers (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    profile_pic VARCHAR(255)
-);
-
-CREATE TABLE IF NOT EXISTS students (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    subject VARCHAR(100) NOT NULL,
-    mark INT NOT NULL,
-    teacher_id INT,
-    UNIQUE KEY unique_student_subject_teacher (name, subject, teacher_id)
-);
-```
+- Import the database to get all tables and table data to login
 - Update your MySQL credentials in `app.py` if needed.
 
 ### 4. Run the App
