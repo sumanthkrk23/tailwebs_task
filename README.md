@@ -89,6 +89,3 @@ python app.py
 ## Customization
 - You can further style the UI with Tailwind CSS.
 - Add more teacher profile fields or features as needed.
-
-## License
-MIT 
