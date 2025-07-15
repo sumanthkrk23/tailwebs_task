@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-100 via-white to-blue-100">
+    <div class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-2xl border border-gray-200 p-10 flex flex-col items-center">
+        <h1 class="text-3xl font-extrabold text-red-600 text-center mb-6 tracking-tight">tailwebs.</h1>
+        <h2 class="text-xl font-semibold mb-6 text-gray-800">Teacher Registration</h2>
+        <form id="registerForm" class="space-y-6 w-full">
+            <div>
+                <label for="regUsername" class="block text-gray-700 font-medium mb-1">Username</label>
+                <input autocomplete="username" type="text" id="regUsername" name="username" required placeholder="Enter your username" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition" />
+            </div>
+            <div>
+                <label for="regPassword" class="block text-gray-700 font-medium mb-1">Password</label>
+                <div class="relative">
+                    <input autocomplete="new-password" type="password" id="regPassword" name="password" required placeholder="Enter your password" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition pr-10" />
+                    <button type="button" id="toggleRegPassword" tabindex="-1" class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-700 focus:outline-none">
+                        <svg id="regEye" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <svg id="regEyeOff" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.956 9.956 0 012.293-3.95m3.362-2.675A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.956 9.956 0 01-4.293 5.032M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div>
+                <label for="regConfirmPassword" class="block text-gray-700 font-medium mb-1">Confirm Password</label>
+                <div class="relative">
+                    <input autocomplete="new-password" type="password" id="regConfirmPassword" name="confirm_password" required placeholder="Confirm your password" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition pr-10" />
+                    <button type="button" id="toggleRegConfirmPassword" tabindex="-1" class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-700 focus:outline-none">
+                        <svg id="regConfirmEye" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <svg id="regConfirmEyeOff" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.956 9.956 0 012.293-3.95m3.362-2.675A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.956 9.956 0 01-4.293 5.032M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white py-2 rounded-lg font-semibold shadow hover:from-red-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-red-400 transition">Register</button>
+            <div id="registerError" class="text-red-500 text-center mt-2 hidden"></div>
+        </form>
+        <div class="mt-4 text-center">
+            <a href="/login" class="text-blue-500 hover:underline">Already have an account? Login</a>
+        </div>
+    </div>
+    <script>
+    // Eye icon logic for register form
+    function setupEyeToggle(inputId, eyeId, eyeOffId, btnId) {
+      const input = document.getElementById(inputId);
+      const eye = document.getElementById(eyeId);
+      const eyeOff = document.getElementById(eyeOffId);
+      const btn = document.getElementById(btnId);
+      btn.addEventListener('click', function () {
+        const type = input.type === 'password' ? 'text' : 'password';
+        input.type = type;
+        if (type === 'text') {
+          eye.classList.add('hidden');
+          eyeOff.classList.remove('hidden');
+        } else {
+          eye.classList.remove('hidden');
+          eyeOff.classList.add('hidden');
+        }
+      });
+    }
+    setupEyeToggle('regPassword', 'regEye', 'regEyeOff', 'toggleRegPassword');
+    setupEyeToggle('regConfirmPassword', 'regConfirmEye', 'regConfirmEyeOff', 'toggleRegConfirmPassword');
+
+    // Toast utility (reuse if already present)
+    function showToast(message) {
+        let toast = document.getElementById('toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'toast';
+            toast.className = 'fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 text-lg transition-opacity duration-300 opacity-0';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.classList.remove('opacity-0');
+        toast.classList.add('opacity-100');
+        setTimeout(() => {
+            toast.classList.remove('opacity-100');
+            toast.classList.add('opacity-0');
+        }, 1000);
+    }
+
+    // Register form logic
+    document.getElementById('registerForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const username = document.getElementById('regUsername').value;
+        const password = document.getElementById('regPassword').value;
+        const confirm_password = document.getElementById('regConfirmPassword').value;
+        const errorDiv = document.getElementById('registerError');
+        errorDiv.classList.add('hidden');
+        if (password !== confirm_password) {
+            errorDiv.textContent = 'Passwords do not match';
+            errorDiv.classList.remove('hidden');
+            return;
+        }
+        const res = await fetch('/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+            showToast('Registration successful!');
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 600);
+        } else {
+            errorDiv.textContent = data.message || 'Registration failed';
+            errorDiv.classList.remove('hidden');
+        }
+    };
+    </script>
+</body>
+</html> 
