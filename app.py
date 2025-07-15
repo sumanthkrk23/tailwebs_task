@@ -16,9 +16,9 @@ app.config['MYSQL_DB'] = 'teacher_portal'
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 mysql = MySQL(app)
-JWT_SECRET = 'zsnbcuqtvcsd6ryryd5yc56cw2jhdtefg22b3d82'
+JWT_SECRET = 'zsnbcuqtvcsd6ryryd5yc5sdfsd6cw2jhdtefg22b3d82'
 
-# JWT Decorator
+# JWT Decorator function
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -35,10 +35,12 @@ def token_required(f):
         return f(current_user, *args, **kwargs)
     return decorated
 
+# API to redirect to login page
 @app.route('/')
 def index():
     return redirect(url_for('login'))
 
+# API to handle login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -54,6 +56,7 @@ def login():
             return jsonify({'message': 'Invalid credentials'}), 401
     return render_template('login.html')
 
+# API to handle teacher registration
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
@@ -65,10 +68,12 @@ def register():
     mysql.connection.commit()
     return jsonify({'message': 'Teacher registered successfully'})
 
+# API to render the registration page
 @app.route('/register', methods=['GET'])
 def register_page():
     return render_template('register.html')
 
+# API to render the dashboard
 @app.route('/dashboard')
 def dashboard():
     token = request.cookies.get('jwt') or request.headers.get('Authorization', '').replace('Bearer ', '') or request.args.get('token') or None
@@ -80,13 +85,14 @@ def dashboard():
         return redirect(url_for('login'))
     return render_template('dashboard.html')
 
-# Helper to get teacher_id from username
+# Helper function to get teacher_id from username
 def get_teacher_id(username):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT id FROM teachers WHERE username = %s', (username,))
     user = cursor.fetchone()
     return user['id'] if user else None
 
+# API to view existing students to the specific teacher
 @app.route('/students', methods=['GET'])
 @token_required
 def get_students(current_user):
@@ -96,6 +102,7 @@ def get_students(current_user):
     students = cursor.fetchall()
     return jsonify(students)
 
+# API to add students and marks
 @app.route('/students', methods=['POST'])
 @token_required
 def add_student(current_user):
@@ -114,6 +121,7 @@ def add_student(current_user):
     mysql.connection.commit()
     return jsonify({'message': 'Student record updated/added'})
 
+# API to edit student marks
 @app.route('/students/<int:id>', methods=['PUT'])
 @token_required
 def edit_student(current_user, id):
@@ -128,6 +136,7 @@ def edit_student(current_user, id):
     mysql.connection.commit()
     return jsonify({'message': 'Student updated'})
 
+# API to delete a student
 @app.route('/students/<int:id>', methods=['DELETE'])
 @token_required
 def delete_student(current_user, id):
@@ -138,6 +147,7 @@ def delete_student(current_user, id):
     mysql.connection.commit()
     return jsonify({'message': 'Student deleted'})
 
+# API to handle forgot password
 @app.route('/forgot-password', methods=['POST'])
 def forgot_password():
     data = request.json
@@ -159,6 +169,7 @@ def forgot_password():
     mysql.connection.commit()
     return jsonify({'message': 'Password updated successfully'})
 
+# API to upload profile picture
 @app.route('/upload-profile-pic', methods=['POST'])
 @token_required
 def upload_profile_pic(current_user):
@@ -177,6 +188,7 @@ def upload_profile_pic(current_user):
         return jsonify({'message': 'Profile picture updated', 'profile_pic': filename})
     return jsonify({'message': 'File upload failed'}), 500
 
+# API to get teacher profile
 @app.route('/profile', methods=['GET'])
 @token_required
 def get_profile(current_user):
@@ -191,6 +203,7 @@ def get_profile(current_user):
         return jsonify(user)
     return jsonify({'message': 'User not found'}), 404
 
+# API to serve uploaded files
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
@@ -198,4 +211,4 @@ def uploaded_file(filename):
 if __name__ == '__main__':
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
-    app.run(debug=True) 
+    app.run(debug=True)
